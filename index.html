@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111014">
+  <title>เปิดป้าย ทายเพลงไทย</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">♪</span>
+        <div><strong>เปิดป้าย</strong><span>ทายเพลงไทย</span></div>
+      </div>
+      <div class="header-tools">
+        <button class="music-toggle" id="music-toggle" type="button" aria-pressed="false" title="เปิดหรือปิดเพลงพื้นหลัง"><span aria-hidden="true">♫</span><span id="music-label">เปิดเพลง</span></button>
+        <div class="scoreboard" aria-label="คะแนนและความคืบหน้า">
+        <div><span>คะแนน</span><strong id="score">0</strong></div>
+        <div><span>เล่นแล้ว</span><strong><span id="played">0</span>/<span id="total-songs">100</span></strong></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="game" aria-labelledby="game-title">
+      <div class="round-meta">
+        <span id="round-label">เพลงที่ 1</span>
+        <span id="era-label">สุ่มจากปี 2000–2025</span>
+      </div>
+      <h1 id="game-title">เพลงนี้คือเพลงอะไร?</h1>
+      <p class="subhead">เปิดคำใบ้ทีละป้าย ยิ่งเปิดน้อย ยิ่งได้คะแนนมาก</p>
+
+      <div class="mode-switch" role="group" aria-label="เลือกโหมดเกม">
+        <button class="mode-button active" id="clue-mode" type="button" aria-pressed="true">โหมดเปิดป้าย</button>
+        <button class="mode-button" id="audio-mode" type="button" aria-pressed="false">โหมดทายจากเสียง</button>
+      </div>
+
+      <div class="clue-grid" id="clue-grid" aria-label="ป้ายคำใบ้ 5 ป้าย"></div>
+
+      <div class="guess-panel" id="guess-panel">
+        <label for="guess-input">พิมพ์ชื่อเพลงที่ได้ยิน</label>
+        <div class="guess-row">
+          <input id="guess-input" type="text" autocomplete="off" placeholder="ชื่อเพลง...">
+          <button class="button button-check" id="check-button" type="button">ตรวจคำตอบ</button>
+        </div>
+        <p id="guess-feedback" aria-live="polite"></p>
+      </div>
+
+      <section class="answer-panel" id="answer-panel" aria-live="polite">
+        <span class="answer-kicker">เฉลย</span>
+        <h2 id="answer-title">ยังไม่เปิดเฉลย</h2>
+        <p id="answer-detail">ลองเปิดคำใบ้ก่อน แล้วค่อยตัดสินใจ</p>
+      </section>
+
+      <div class="actions">
+        <button class="button button-audio" id="audio-button" type="button"><span aria-hidden="true">▶</span> คำใบ้เสียง 10 วิ</button>
+        <button class="button button-secondary" id="reveal-button" type="button">เปิดเฉลย</button>
+        <button class="button button-primary" id="next-button" type="button" disabled>เพลงถัดไป <span aria-hidden="true">→</span></button>
+      </div>
+      <p class="audio-status" id="audio-status" aria-live="polite"></p>
+      <audio id="audio-preview" preload="none"></audio>
+    </section>
+
+    <section class="progress-section" aria-labelledby="playlist-title">
+      <div class="section-heading">
+        <div><span class="eyebrow">PLAYLIST</span><h2 id="playlist-title">100 เพลงข้ามยุค</h2></div>
+        <button class="text-button" id="reset-button" type="button">เริ่มเกมใหม่</button>
+      </div>
+      <div class="song-progress" id="song-progress" aria-label="ความคืบหน้าทั้ง 100 เพลง"></div>
+      <p class="data-note">คำใบ้บางข้อเรียบเรียงใจความจากท่อนหนึ่งของเพลงใหม่ โดยไม่คัดเนื้อร้องต้นฉบับโดยตรง</p>
+    </section>
+  </main>
+  <script src="songs100.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
