@@ -76,9 +76,12 @@ let audioUsed = false;
 let audioTimer = null;
 let bgContext = null;
 let bgMaster = null;
+let bgCompressor = null;
 let bgTimer = null;
 let bgPlaying = false;
 const bgVoices = new Set();
+const BG_VOLUME = 0.72;
+const BG_DUCKED_VOLUME = 0.06;
 let gameMode = "clue";
 const previewCache = new Map();
 
@@ -137,10 +140,10 @@ function scheduleMusicBar() {
   const melody = [329.63, 392.00, 440.00, 392.00, 293.66, 329.63, 261.63, 293.66];
   chords.forEach((chord, chordIndex) => {
     const chordStart = start + chordIndex * 2;
-    chord.forEach(frequency => scheduleTone(frequency, chordStart, 1.9, 0.032));
-    scheduleTone(chord[0] / 2, chordStart, 1.7, 0.045, "triangle");
+    chord.forEach(frequency => scheduleTone(frequency, chordStart, 1.9, 0.075));
+    scheduleTone(chord[0] / 2, chordStart, 1.7, 0.1, "triangle");
   });
-  melody.forEach((frequency, index) => scheduleTone(frequency, start + index, 0.55, 0.024, "triangle"));
+  melody.forEach((frequency, index) => scheduleTone(frequency, start + index, 0.55, 0.06, "triangle"));
 }
 
 async function toggleBackgroundMusic() {
@@ -153,15 +156,21 @@ async function toggleBackgroundMusic() {
     }
     bgContext = new AudioContextClass();
     bgMaster = bgContext.createGain();
-    bgMaster.gain.value = 0.13;
-    bgMaster.connect(bgContext.destination);
+    bgCompressor = bgContext.createDynamicsCompressor();
+    bgCompressor.threshold.value = -18;
+    bgCompressor.knee.value = 18;
+    bgCompressor.ratio.value = 4;
+    bgCompressor.attack.value = 0.01;
+    bgCompressor.release.value = 0.25;
+    bgMaster.gain.value = BG_VOLUME;
+    bgMaster.connect(bgCompressor).connect(bgContext.destination);
   }
   await bgContext.resume();
   bgPlaying = !bgPlaying;
   musicToggle.setAttribute("aria-pressed", String(bgPlaying));
   musicLabel.textContent = bgPlaying ? "ปิดเพลง" : "เปิดเพลง";
   if (bgPlaying) {
-    bgMaster.gain.setTargetAtTime(0.13, bgContext.currentTime, 0.08);
+    bgMaster.gain.setTargetAtTime(BG_VOLUME, bgContext.currentTime, 0.08);
     clearInterval(bgTimer);
     scheduleMusicBar();
     bgTimer = setInterval(scheduleMusicBar, 8000);
@@ -178,7 +187,7 @@ async function toggleBackgroundMusic() {
 
 function duckBackgroundMusic(ducked) {
   if (!bgPlaying || !bgContext) return;
-  bgMaster.gain.setTargetAtTime(ducked ? 0.015 : 0.13, bgContext.currentTime, 0.12);
+  bgMaster.gain.setTargetAtTime(ducked ? BG_DUCKED_VOLUME : BG_VOLUME, bgContext.currentTime, 0.12);
 }
 
 function stopAudio() {
