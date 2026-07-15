@@ -13,7 +13,7 @@
     const clues = [
       titleCue,
       artistHints[hash(title) % artistHints.length],
-      `เพลงออกช่วงปี ${year} อยู่ในบรรยากาศเพลงไทยยุค ${Math.floor(year / 5) * 5}`,
+      `ชื่อเพลงขึ้นต้นด้วย “${title[0]}” และมีความยาวประมาณ ${title.replace(/\s/g, "").length} ตัวอักษร`,
       story,
       mood
     ];

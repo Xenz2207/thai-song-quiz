@@ -285,7 +285,7 @@ function renderRound() {
   audioUsed = false;
   stopAudio();
   document.querySelector("#round-label").textContent = `เพลงที่ ${round + 1}`;
-  document.querySelector("#era-label").textContent = `ยุค ${Math.floor(song.year / 5) * 5} · ${song.kind}`;
+  document.querySelector("#era-label").textContent = song.kind;
   document.querySelector("#played").textContent = round;
   answerPanel.classList.remove("revealed");
   answerTitle.textContent = "ยังไม่เปิดเฉลย";
