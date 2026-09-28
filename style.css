@@ -87,10 +87,12 @@ h1 { width: 100%; max-width: 760px; margin: 14px auto 4px; overflow-wrap: anywhe
 .eyebrow { color: var(--pink); font-size: 11px; font-weight: 900; }
 .text-button { padding: 6px 0; border: 0; color: var(--amber); background: transparent; font-weight: 700; cursor: pointer; }
 .song-progress { margin-top: 22px; display: grid; grid-template-columns: repeat(15, 1fr); gap: 6px; }
-.progress-dot { aspect-ratio: 1; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); background: var(--panel); font-size: 10px; }
+.progress-dot { aspect-ratio: 1; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); background: var(--panel); font: inherit; font-size: 10px; cursor: pointer; }
+.progress-dot:hover, .progress-dot:focus-visible { border-color: var(--pink); color: var(--text); outline: 2px solid rgba(255,61,141,.25); }
 .progress-dot.current { border-color: var(--amber); color: #171217; background: var(--amber); }
 .progress-dot.done { border-color: rgba(102,212,154,.5); color: var(--green); background: rgba(102,212,154,.12); }
 .data-note { margin: 18px 0 0; color: #817b85; font-size: 11px; }
+.playlist-hint { margin: 12px 0 0; color: var(--muted); font-size: 12px; }
 
 @media (max-width: 760px) {
   .topbar { align-items: center; }

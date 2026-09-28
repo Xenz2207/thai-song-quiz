@@ -18,7 +18,7 @@
         <button class="music-toggle" id="music-toggle" type="button" aria-pressed="false" title="เปิดหรือปิดเพลงพื้นหลัง"><span aria-hidden="true">♫</span><span id="music-label">เปิดเพลง</span></button>
         <div class="scoreboard" aria-label="คะแนนและความคืบหน้า">
         <div><span>คะแนน</span><strong id="score">0</strong></div>
-        <div><span>เล่นแล้ว</span><strong><span id="played">0</span>/<span id="total-songs">100</span></strong></div>
+        <div><span>เล่นแล้ว</span><strong><span id="played">0</span>/<span id="total-songs">200</span></strong></div>
         </div>
       </div>
     </header>
@@ -26,10 +26,10 @@
     <section class="game" aria-labelledby="game-title">
       <div class="round-meta">
         <span id="round-label">เพลงที่ 1</span>
-        <span id="era-label">สุ่มจากปี 2000–2025</span>
+        <span id="era-label">สุ่มเพลงฮิตหลายยุค</span>
       </div>
       <h1 id="game-title">เพลงนี้คือเพลงอะไร?</h1>
-      <p class="subhead">เปิดคำใบ้ทีละป้าย ยิ่งเปิดน้อย ยิ่งได้คะแนนมาก</p>
+      <p class="subhead">เปิดป้ายทีละใบเพื่อเก็บคำใบ้ · ทายน้อยใบยิ่งได้คะแนนมาก</p>
 
       <div class="mode-switch" role="group" aria-label="เลือกโหมดเกม">
         <button class="mode-button active" id="clue-mode" type="button" aria-pressed="true">โหมดเปิดป้าย</button>
@@ -64,10 +64,11 @@
 
     <section class="progress-section" aria-labelledby="playlist-title">
       <div class="section-heading">
-        <div><span class="eyebrow">PLAYLIST</span><h2 id="playlist-title">100 เพลงข้ามยุค</h2></div>
+        <div><span class="eyebrow">PLAYLIST</span><h2 id="playlist-title">200 เพลงฮิตข้ามยุค</h2></div>
         <button class="text-button" id="reset-button" type="button">เริ่มเกมใหม่</button>
       </div>
-      <div class="song-progress" id="song-progress" aria-label="ความคืบหน้าทั้ง 100 เพลง"></div>
+      <div class="song-progress" id="song-progress" aria-label="รายการเพลง 200 เพลง กดหมายเลขเพื่อฟังตัวอย่างเพลง"></div>
+      <p class="playlist-hint">กดหมายเลขเพลงเพื่อฟังตัวอย่างจาก Apple Music · ตัวอย่างมีความยาวสูงสุด 30 วินาที</p>
       <p class="data-note">คำใบ้บางข้อเรียบเรียงใจความจากท่อนหนึ่งของเพลงใหม่ โดยไม่คัดเนื้อร้องต้นฉบับโดยตรง</p>
     </section>
   </main>

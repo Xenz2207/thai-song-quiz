@@ -249,22 +249,13 @@ async function playAudioHint() {
 
   try {
     const song = currentSong();
-    let previewUrl = previewCache.get(song.title);
-    if (!previewUrl) {
-      const data = await searchItunes(`${song.title} ${song.artist}`);
-      const target = normalizeText(song.title.split("(")[0]);
-      const match = data.results.find(item => item.previewUrl && normalizeText(item.trackName).includes(target));
-      if (!match) throw new Error("preview unavailable");
-      previewUrl = match.previewUrl;
-      previewCache.set(song.title, previewUrl);
-    }
-
+    const previewUrl = await findPreview(song);
     audioPreview.src = previewUrl;
     duckBackgroundMusic(true);
     await audioPreview.play();
     audioButton.disabled = false;
     audioButton.textContent = "หยุดคำใบ้เสียง";
-    audioStatus.textContent = "คำใบ้เสียงจะหยุดอัตโนมัติ (ตัวอย่างอาจไม่เริ่มจากวินาทีแรกของเพลง)";
+    audioStatus.textContent = "กำลังเล่นตัวอย่างเพลง · กดอีกครั้งเพื่อหยุด";
     audioTimer = setTimeout(() => {
       stopAudio();
       audioButton.disabled = false;
@@ -272,9 +263,54 @@ async function playAudioHint() {
       audioStatus.textContent = "เล่นคำใบ้เสียงครบ 10 วินาทีแล้ว";
     }, 10000);
   } catch {
-    audioButton.disabled = true;
-    audioButton.textContent = "ไม่มีตัวอย่างเสียงเพลงนี้";
-    audioStatus.textContent = "ใช้คำใบ้ข้อความ 5 ป้ายแทนได้ตามปกติ";
+    audioButton.disabled = false;
+    audioButton.textContent = "ลองฟังอีกครั้ง";
+    audioStatus.textContent = "ยังไม่พบตัวอย่างเสียงเพลงนี้ ลองกดอีกครั้งหรือตรวจการเชื่อมต่ออินเทอร์เน็ต";
+  }
+}
+
+async function findPreview(song) {
+  let previewUrl = previewCache.get(song.title);
+  if (previewUrl) return previewUrl;
+  const data = await searchItunes(`${song.title} ${song.artist}`);
+  const target = normalizeText(song.title.split("(")[0]);
+  const artist = normalizeText(song.artist.split(/feat\.?|ft\.?|x/i)[0]);
+  const matches = data.results.filter(item => item.previewUrl && normalizeText(item.trackName).includes(target));
+  const match = matches.find(item => normalizeText(item.artistName).includes(artist)) || matches[0];
+  if (!match) throw new Error("preview unavailable");
+  previewCache.set(song.title, match.previewUrl);
+  return match.previewUrl;
+}
+
+async function playSongFromPlaylist(index, button) {
+  const song = songs[index];
+  if (audioPreview.dataset.playingIndex === String(index) && !audioPreview.paused) {
+    stopAudio();
+    delete audioPreview.dataset.playingIndex;
+    audioStatus.textContent = "หยุดเสียงแล้ว";
+    return;
+  }
+  stopAudio();
+  audioStatus.textContent = `กำลังค้นหาตัวอย่างเพลง “${song.title}”`;
+  button.disabled = true;
+  try {
+    audioPreview.src = await findPreview(song);
+    audioPreview.dataset.playingIndex = String(index);
+    duckBackgroundMusic(true);
+    await audioPreview.play();
+    audioStatus.textContent = `กำลังเล่น “${song.title}” · เล่นตัวอย่าง 30 วินาที`;
+    audioTimer = setTimeout(() => {
+      stopAudio();
+      delete audioPreview.dataset.playingIndex;
+    }, 30000);
+    audioPreview.onended = () => {
+      stopAudio();
+      delete audioPreview.dataset.playingIndex;
+    };
+  } catch {
+    audioStatus.textContent = `ยังไม่พบตัวอย่างเสียงสำหรับ “${song.title}”`;
+  } finally {
+    button.disabled = false;
   }
 }
 
@@ -374,9 +410,13 @@ function renderProgress() {
   const container = document.querySelector("#song-progress");
   container.innerHTML = "";
   songs.forEach((_, index) => {
-    const dot = document.createElement("span");
+    const dot = document.createElement("button");
     dot.className = `progress-dot${index < round ? " done" : ""}${index === round ? " current" : ""}`;
+    dot.type = "button";
     dot.textContent = index < round ? "✓" : index + 1;
+    dot.title = `ฟังเพลง ${index + 1}: ${songs[index].title} — ${songs[index].artist}`;
+    dot.setAttribute("aria-label", dot.title);
+    dot.addEventListener("click", () => playSongFromPlaylist(index, dot));
     container.append(dot);
   });
 }
