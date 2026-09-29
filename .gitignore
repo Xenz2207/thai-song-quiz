@@ -1,0 +1,6 @@
+.vercel/
+.catalog-work/
+.report-work/
+catalog-audit.json
+node_modules/
+docs/~$*
