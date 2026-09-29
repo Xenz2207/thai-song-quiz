@@ -4,3 +4,6 @@
 catalog-audit.json
 node_modules/
 docs/~$*
+
+.vercel
+.env*
