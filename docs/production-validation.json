@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-10-02T04:42:33.880Z",
+  "url": "https://thai-song-quiz-two.vercel.app/",
+  "version": "v1.1.0",
+  "anonymousBrowser": true,
+  "status": 200,
+  "catalogMatchesLocal": true,
+  "totalSongs": 1000,
+  "categories": [
+    {
+      "category": "80s",
+      "count": 200,
+      "title": "ยินยอม",
+      "ok": true
+    },
+    {
+      "category": "90s",
+      "count": 200,
+      "title": "คู่กัด",
+      "ok": true
+    },
+    {
+      "category": "2000s",
+      "count": 200,
+      "title": "คนไม่มีแฟน",
+      "ok": true
+    },
+    {
+      "category": "2010s",
+      "count": 200,
+      "title": "แสงสุดท้าย",
+      "ok": true
+    },
+    {
+      "category": "2020s",
+      "count": 200,
+      "title": "ถ้าเราเจอกันอีก",
+      "ok": true
+    }
+  ],
+  "mixedPool": 1000,
+  "mobileOverflow": false,
+  "gameInteractions": "hint, reveal, next round",
+  "pageErrors": []
+}

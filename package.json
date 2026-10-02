@@ -1,0 +1,14 @@
+{
+  "name": "thai-song-quiz",
+  "private": true,
+  "scripts": {
+    "test": "node tests/categories.cjs && node tests/game-regression.cjs",
+    "test:audio": "node tests/audio-catalog.cjs"
+  },
+  "devDependencies": {
+    "docx": "^9.8.1",
+    "markdown-it": "^14.3.1",
+    "playwright": "1.63.0"
+  },
+  "version": "1.1.0"
+}

@@ -1,0 +1,9 @@
+.git
+.serena
+.catalog-work
+.report-work
+node_modules
+.env*
+tests
+scripts
+catalog-audit.json
