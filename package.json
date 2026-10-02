@@ -2,7 +2,7 @@
   "name": "thai-song-quiz",
   "private": true,
   "scripts": {
-    "test": "node tests/categories.cjs && node tests/game-regression.cjs",
+    "test": "node tests/puzzle-hints.cjs && node tests/categories.cjs && node tests/game-regression.cjs",
     "test:audio": "node tests/audio-catalog.cjs"
   },
   "devDependencies": {
@@ -10,5 +10,5 @@
     "markdown-it": "^14.3.1",
     "playwright": "1.63.0"
   },
-  "version": "1.1.0"
+  "version": "1.2.0"
 }

@@ -37,6 +37,10 @@ const { chromium } = require('playwright');
     await page.locator('.hint').first().click();
     await page.waitForTimeout(350);
     await page.locator('main').screenshot({ path: 'docs/images/categories-2020s-mobile.png' });
-    console.log('Captured five current report screenshots.');
+    await pick('วาฬเกยตื้น');
+    for (let index = 0; index < 4; index++) await page.locator('.hint').nth(index).click();
+    await page.waitForTimeout(350);
+    await page.locator('main').screenshot({ path: 'docs/images/puzzle-hints-mobile.png' });
+    console.log('Captured six current report screenshots.');
   } finally { await browser.close(); }
 })().catch(e => { console.error(e); process.exitCode = 1; });

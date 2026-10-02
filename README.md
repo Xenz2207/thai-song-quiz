@@ -8,7 +8,11 @@ Songs are selected from Apple Music Thai essentials playlists, annual Top Songs:
 
 The app is a static site. Open `index.html` directly in a browser or deploy the project to any static hosting provider.
 
-Play [v1.1.0 on Vercel](https://thai-song-quiz-two.vercel.app/). See the [release](https://github.com/Xenz2207/thai-song-quiz/releases/tag/v1.1.0) and [documentation](docs/README.md).
+Play [v1.2.0 on Vercel](https://thai-song-quiz-two.vercel.app/). See the [release](https://github.com/Xenz2207/thai-song-quiz/releases/tag/v1.2.0) and [documentation](docs/README.md).
+
+The four clue cards are **emoji puzzle**, **initial letters**, **artist/band**, and **missing letters**. Puzzles use the song title with catalog qualifiers removed. Open a clue to deduct 10 points; all four clues leave 60 before audio. Emoji puzzles are semantic interpretations, and initial letters follow Thai word segmentation with compound-word adjustments.
+
+To regenerate static clues after editing their rules or overrides, run `node scripts/generate-puzzle-hints.cjs`, then `npm test`.
 
 ## Deploy
 

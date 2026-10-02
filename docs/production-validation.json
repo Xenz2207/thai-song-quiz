@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-10-02T04:42:33.880Z",
+  "checked_at": "2026-10-02T06:42:20.502Z",
   "url": "https://thai-song-quiz-two.vercel.app/",
-  "version": "v1.1.0",
+  "version": "v1.2.0",
   "anonymousBrowser": true,
   "status": 200,
   "catalogMatchesLocal": true,
@@ -39,7 +39,14 @@
     }
   ],
   "mixedPool": 1000,
+  "puzzleHints": [
+    "emoji puzzle",
+    "initial letters",
+    "artist or band",
+    "missing letters"
+  ],
+  "scoreAfterFourHints": 60,
   "mobileOverflow": false,
-  "gameInteractions": "hint, reveal, next round",
+  "gameInteractions": "four hints, reveal, next round",
   "pageErrors": []
 }

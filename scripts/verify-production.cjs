@@ -31,12 +31,14 @@ const { chromium } = require('playwright');
     }
     await page.locator('[data-category="all"]').click();
     assert.equal(await page.evaluate(() => categorySongs().length), 1000);
-    await page.locator('.hint').first().click();
+    for (let index = 0; index < 4; index++) await page.locator('.hint').nth(index).click();
+    for (const label of ['อีโมจิ','พยัญชนะต้น','ศิลปิน / วง','อักษรที่หายไป']) assert((await page.locator('#hints').innerText()).includes(label));
+    assert.equal(await page.evaluate(() => score), 60);
     await page.locator('#reveal').click();
     await page.locator('#next').click();
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     assert.deepEqual(errors, []);
-    fs.writeFileSync('docs/production-validation.json', JSON.stringify({ checked_at: new Date().toISOString(), url: page.url(), version: 'v1.1.0', anonymousBrowser: true, status: 200, catalogMatchesLocal: true, totalSongs: 1000, categories: results, mixedPool: 1000, mobileOverflow: false, gameInteractions: 'hint, reveal, next round', pageErrors: errors }, null, 2));
+    fs.writeFileSync('docs/production-validation.json', JSON.stringify({ checked_at: new Date().toISOString(), url: page.url(), version: 'v'+require('../package.json').version, anonymousBrowser: true, status: 200, catalogMatchesLocal: true, totalSongs: 1000, categories: results, mixedPool: 1000, puzzleHints: ['emoji puzzle', 'initial letters', 'artist or band', 'missing letters'], scoreAfterFourHints: 60, mobileOverflow: false, gameInteractions: 'four hints, reveal, next round', pageErrors: errors }, null, 2));
     console.log('PASS: public production; catalog matches all 1000 songs; five eras, real audio in each era, mixed pool, game controls and mobile layout.');
   } finally { await browser.close(); }
 })().catch(e => { console.error(e); process.exitCode = 1; });
