@@ -1,0 +1,167 @@
+{
+  "updated_at": "2026-10-02T07:38:40.406Z",
+  "note": "Original archived images and current captures of historical code are distinguished explicitly. Current screenshots are in the parent images directory.",
+  "images": [
+    {
+      "file": "refresh-200-desktop.png",
+      "label": "หน้าตาใหม่ 200 เพลง — ภาพเดิมจาก Git",
+      "kind": "original_git_image",
+      "commit": "8c93e055ac4a5c6c08986283b86336e6424f0a58",
+      "commit_date": "2026-09-29T13:24:53+07:00",
+      "source_file": "docs/images/game-desktop.png",
+      "source_image_sha256": "7a0f5303d747fa766752ac22fbf741082f73e409f35d75ec9d78c11073a8650f",
+      "demonstration": "Original screenshot bytes recovered from Git; no image editing. The commit date is the archive date, not a claimed screenshot capture time.",
+      "image_sha256": "7a0f5303d747fa766752ac22fbf741082f73e409f35d75ec9d78c11073a8650f",
+      "width": 960,
+      "height": 1166
+    },
+    {
+      "file": "refresh-200-result.png",
+      "label": "เฉลยและประวัติ 200 เพลง — ภาพเดิมจาก Git",
+      "kind": "original_git_image",
+      "commit": "8c93e055ac4a5c6c08986283b86336e6424f0a58",
+      "commit_date": "2026-09-29T13:24:53+07:00",
+      "source_file": "docs/images/result-history.png",
+      "source_image_sha256": "5fc2c8f466df2b4317861652337fe1cb987df7c5aac6b8c8938f422b7b4f8017",
+      "demonstration": "Original screenshot bytes recovered from Git; no image editing. The commit date is the archive date, not a claimed screenshot capture time.",
+      "image_sha256": "5fc2c8f466df2b4317861652337fe1cb987df7c5aac6b8c8938f422b7b4f8017",
+      "width": 960,
+      "height": 841
+    },
+    {
+      "file": "refresh-200-mobile.png",
+      "label": "หน้าจอมือถือ 200 เพลง — ภาพเดิมจาก Git",
+      "kind": "original_git_image",
+      "commit": "8c93e055ac4a5c6c08986283b86336e6424f0a58",
+      "commit_date": "2026-09-29T13:24:53+07:00",
+      "source_file": "docs/images/game-mobile.png",
+      "source_image_sha256": "9ce0172eb93603a82cd0a6b52b94eefc877bada3d2d0d51e2a6249f9ef3ccb09",
+      "demonstration": "Original screenshot bytes recovered from Git; no image editing. The commit date is the archive date, not a claimed screenshot capture time.",
+      "image_sha256": "9ce0172eb93603a82cd0a6b52b94eefc877bada3d2d0d51e2a6249f9ef3ccb09",
+      "width": 368,
+      "height": 1216
+    },
+    {
+      "file": "v1.1.0-desktop.png",
+      "label": "v1.1.0 แบ่ง 5 ยุค รวม 1,000 เพลง — ภาพเดิมจาก Git",
+      "kind": "original_git_image",
+      "commit": "774a47918f01abb83c1873faef99f21ac1010d45",
+      "commit_date": "2026-10-02T11:44:28+07:00",
+      "source_file": "docs/images/game-desktop.png",
+      "source_image_sha256": "a72fd6bbd5ba9d780b10330740b0599c60b4f3ed57977cde8116e1509df73768",
+      "demonstration": "Original screenshot bytes recovered from Git; no image editing. The commit date is the archive date, not a claimed screenshot capture time.",
+      "image_sha256": "a72fd6bbd5ba9d780b10330740b0599c60b4f3ed57977cde8116e1509df73768",
+      "width": 960,
+      "height": 1361
+    },
+    {
+      "file": "v1.1.0-2020s-mobile.png",
+      "label": "v1.1.0 หมวด 2020–2026 ก่อนเปลี่ยนคำใบ้ — ภาพเดิมจาก Git",
+      "kind": "original_git_image",
+      "commit": "774a47918f01abb83c1873faef99f21ac1010d45",
+      "commit_date": "2026-10-02T11:44:28+07:00",
+      "source_file": "docs/images/categories-2020s-mobile.png",
+      "source_image_sha256": "bfb5f2066f5e3e5c8d13065deff29eaafbd76fc28f4e9e6521f0124288fe3bd3",
+      "demonstration": "Original screenshot bytes recovered from Git; no image editing. The commit date is the archive date, not a claimed screenshot capture time.",
+      "image_sha256": "bfb5f2066f5e3e5c8d13065deff29eaafbd76fc28f4e9e6521f0124288fe3bd3",
+      "width": 368,
+      "height": 1611
+    },
+    {
+      "file": "legacy-100-desktop.png",
+      "label": "หน้าตาเดิม 100 เพลง",
+      "kind": "reconstructed_from_git",
+      "commit": "f670c6d9eb0f5551735e0595f51abe3b0fe1bc50",
+      "commit_date": "2026-07-14T22:53:29+07:00",
+      "source_files": [
+        "index.html",
+        "style.css",
+        "script.js",
+        "songs100.js",
+        "assets/stage-bg.png"
+      ],
+      "html_sha256": "ff00d5126b272720e2c354049ad087db1129b26b93527e7cee4bba06a89b074e",
+      "captured_at": "2026-10-02T07:38:36.006Z",
+      "demonstration": "Captured now from unchanged historical Git files; fixed shuffle seed and opened one clue for a demonstration. This design comes from earlier merged Git history, not a claimed screenshot of a September prompt revision.",
+      "image_sha256": "6f7327269b93b5f44a659e0cbbe74d110369d7a6e96e6b753a7b58537bad9a09",
+      "width": 1280,
+      "height": 1000
+    },
+    {
+      "file": "legacy-200-mobile.png",
+      "label": "หน้าตาเดิม 200 เพลง",
+      "kind": "reconstructed_from_git",
+      "commit": "5f2a4580cb063567e53f5b05f2691f7b12936e45",
+      "commit_date": "2026-09-28T17:55:11+07:00",
+      "source_files": [
+        "index.html",
+        "style.css",
+        "script.js",
+        "songs100.js",
+        "assets/stage-bg.png"
+      ],
+      "html_sha256": "15d0a8add93c948e4e3dc67b85d4730939e485ee86ec83cd68413116e7890d99",
+      "captured_at": "2026-10-02T07:38:36.777Z",
+      "demonstration": "Captured now from unchanged historical Git files; fixed shuffle seed and opened one clue for a demonstration. This design comes from earlier merged Git history, not a claimed screenshot of a September prompt revision.",
+      "image_sha256": "8d14bc89437486af9f073236c9f97b34ae5b56aef7ef11d751f9a4fe90421c3d",
+      "width": 390,
+      "height": 1000
+    },
+    {
+      "file": "clue-before-fix-mobile.png",
+      "label": "ก่อนแก้รอบ 7: อยากร้องดังดัง ใช้คำใบ้ยาก",
+      "kind": "reconstructed_from_git",
+      "commit": "8c93e055ac4a5c6c08986283b86336e6424f0a58",
+      "commit_date": "2026-09-29T13:24:53+07:00",
+      "source_files": [
+        "index.html"
+      ],
+      "html_sha256": "fb126f3e0a0c168f422e1c4c535efe9f14455857e48cb91b6d1a79a137b17f04",
+      "captured_at": "2026-10-02T07:38:37.631Z",
+      "demonstration": "Captured now from unchanged historical HTML; selected อยากร้องดังดัง and opened clue 4 to compare the stored clue before and after the fix.",
+      "image_sha256": "993578df7e910df98b9e13cdbd52e3f2a0d62aa0d6bbfe319aeb104347a6d193",
+      "width": 368,
+      "height": 1174
+    },
+    {
+      "file": "corrected-200-mobile.png",
+      "label": "หลังแก้รอบ 7: อยากร้องดังดัง ใช้คำใบ้ร้อง",
+      "kind": "reconstructed_from_git",
+      "commit": "b86161d5718b168251878a69d3fb1e14c1a37269",
+      "commit_date": "2026-09-30T21:17:32+07:00",
+      "source_files": [
+        "index.html"
+      ],
+      "html_sha256": "1cb69d6809db9ff561d031620f214fef8995d6424cb8c3f4f31ac54efd70b193",
+      "captured_at": "2026-10-02T07:38:38.493Z",
+      "demonstration": "Captured now from unchanged historical HTML; selected อยากร้องดังดัง and opened clue 4 to compare the stored clue before and after the fix.",
+      "image_sha256": "5fb3437e5d50f25ef9bc91989b3080b14a03ebbc7be45288ab875224e1857ae0",
+      "width": 368,
+      "height": 1174
+    },
+    {
+      "file": "categories-800-desktop.png",
+      "label": "รอบ 8 คลัง 800 เพลง ก่อนแยก 2010s / 2020s",
+      "kind": "reconstructed_from_local_snapshot",
+      "source_file": ".catalog-work/expanded/app-before-split.html",
+      "html_sha256": "22344ce64c12ec5f86c44437b0d20660fa6a5bb340275bd1c705795722668279",
+      "captured_at": "2026-10-02T07:38:39.348Z",
+      "demonstration": "Captured now from the saved intermediate 800-song HTML; selected 80s and opened clue 1. No Git commit/tag exists for this intermediate snapshot.",
+      "image_sha256": "9c50a96241f23040620b7c8bd024f801d8564b9e3371be23ea8bac10be7f5be1",
+      "width": 960,
+      "height": 1361
+    },
+    {
+      "file": "categories-800-mobile.png",
+      "label": "รอบ 8 คลัง 800 เพลง ก่อนแยก 2010s / 2020s",
+      "kind": "reconstructed_from_local_snapshot",
+      "source_file": ".catalog-work/expanded/app-before-split.html",
+      "html_sha256": "22344ce64c12ec5f86c44437b0d20660fa6a5bb340275bd1c705795722668279",
+      "captured_at": "2026-10-02T07:38:40.187Z",
+      "demonstration": "Captured now from the saved intermediate 800-song HTML; selected 80s and opened clue 1. No Git commit/tag exists for this intermediate snapshot.",
+      "image_sha256": "278cfd3fceae001cd85358679e86b951a850e4bc20f59d4d26160d19ca676c1d",
+      "width": 368,
+      "height": 1529
+    }
+  ]
+}
