@@ -1,44 +1,9 @@
-const fs = require('node:fs');
-const assert = require('node:assert/strict');
-const { chromium } = require('playwright');
-(async () => {
-  const browser = await chromium.launch({ channel: 'msedge', headless: true });
-  try {
-    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
-    const errors = [];
-    page.on('pageerror', e => errors.push(e.message));
-    const response = await page.goto('https://thai-song-quiz-two.vercel.app/', { waitUntil: 'load' });
-    assert.equal(response.status(), 200);
-    assert.equal(await page.locator('[data-category]').count(), 6);
-    const localSongs = JSON.parse(fs.readFileSync('index.html', 'utf8').match(/const songs = (\[[\s\S]*?\]);/)[1]);
-    assert.deepEqual(await page.evaluate(() => songs), localSongs);
-    const results = [];
-    for (const category of ['80s', '90s', '2000s', '2010s', '2020s']) {
-      await page.locator(`[data-category="${category}"]`).click();
-      assert.equal(await page.evaluate(() => categorySongs().length), 200);
-      const playback = await page.evaluate(() => new Promise(resolve => {
-        const song = categorySongs()[0];
-        const audio = new Audio(song.audio_url);
-        audio.muted = true;
-        const timer = setTimeout(() => finish(false), 30000);
-        const finish = ok => { clearTimeout(timer); audio.onplaying = audio.onerror = null; audio.pause(); audio.removeAttribute('src'); audio.load(); resolve({ title: song.title, ok }); };
-        audio.onplaying = () => finish(true);
-        audio.onerror = () => finish(false);
-        audio.play().catch(() => finish(false));
-      }));
-      assert(playback.ok, `${category}: ${playback.title}`);
-      results.push({ category, count: 200, ...playback });
-    }
-    await page.locator('[data-category="all"]').click();
-    assert.equal(await page.evaluate(() => categorySongs().length), 1000);
-    for (let index = 0; index < 4; index++) await page.locator('.hint').nth(index).click();
-    for (const label of ['อีโมจิ','พยัญชนะต้น','ศิลปิน / วง','อักษรที่หายไป']) assert((await page.locator('#hints').innerText()).includes(label));
-    assert.equal(await page.evaluate(() => score), 60);
-    await page.locator('#reveal').click();
-    await page.locator('#next').click();
-    assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
-    assert.deepEqual(errors, []);
-    fs.writeFileSync('docs/production-validation.json', JSON.stringify({ checked_at: new Date().toISOString(), url: page.url(), version: 'v'+require('../package.json').version, anonymousBrowser: true, status: 200, catalogMatchesLocal: true, totalSongs: 1000, categories: results, mixedPool: 1000, puzzleHints: ['emoji puzzle', 'initial letters', 'artist or band', 'missing letters'], scoreAfterFourHints: 60, mobileOverflow: false, gameInteractions: 'four hints, reveal, next round', pageErrors: errors }, null, 2));
-    console.log('PASS: public production; catalog matches all 1000 songs; five eras, real audio in each era, mixed pool, game controls and mobile layout.');
-  } finally { await browser.close(); }
-})().catch(e => { console.error(e); process.exitCode = 1; });
+const { spawnSync } = require('node:child_process');
+const path = require('node:path');
+const result = spawnSync(process.execPath, [path.join(__dirname, '../tests/multiple-choice.cjs')], {
+  cwd: path.join(__dirname, '..'),
+  env: { ...process.env, BASE_URL: process.env.BASE_URL || 'https://thai-song-quiz-two.vercel.app/', VERIFY_AUDIO: '1' },
+  stdio: 'inherit'
+});
+if (result.error) throw result.error;
+process.exitCode = result.status ?? 1;

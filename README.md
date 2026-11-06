@@ -1,37 +1,45 @@
-# Thai Song Quiz
+# Guess The Songs — 4 ช้อยส์
 
-A Thai music guessing game with clue cards, Apple Music/iTunes preview audio, scoring, and round history.
+เว็บเกมทายเพลงไทย 1,152 เพลง ตอบชื่อเพลงและศิลปินอย่างละ 4 ตัวเลือก (ก ข ค ง) ตอบได้ข้อละครั้ง ถูกข้อละ 100 คะแนน รวมรอบละ 200 คะแนน ฟังเสียงตัวอย่างและเปิดคำใบ้ได้ฟรี ตอบครบสองข้อเพื่อดูผล หรือข้ามเพื่อเฉลย เก็บประวัติรอบที่เล่นและสุ่มโดยไม่ซ้ำจนกว่าจะครบหมวด
 
-Choose from **80s (1980–1989)**, **90s (1990–1999)**, **2000s (2000–2009)**, **2010–2019**, and **2020–2026**, each containing 200 songs. **Random / all eras** combines all 1,000 songs. Songs do not repeat until the selected pool is exhausted. Switching categories stops audio, starts a fresh round at 100 points, and preserves completed round history.
+## เล่นและดาวน์โหลด
 
-Songs are selected from Apple Music Thai essentials playlists, annual Top Songs: Thailand playlists, Thai Pop Supreme/Viral Thai Pop, hits compilations, and the existing curated catalog. Each record includes its selection source, catalog credits, and release-year source. Documented corrections distinguish original release years from reissue dates. In-game listening streams iTunes previews (usually 30 seconds); links open the song on Apple Music.
+- เว็บ: https://thai-song-quiz-two.vercel.app/
+- [APK Android ต้นฉบับ v1.0.0](https://github.com/Xenz2207/thai-song-quiz/releases/tag/android-v1.0.0)
 
-The app is a static site. Open `index.html` directly in a browser or deploy the project to any static hosting provider.
+APK เดิมเป็นแอป Kotlin + Jetpack Compose ซึ่ง Vercel รันโดยตรงไม่ได้ เวอร์ชันเว็บ `1.0.0-web.1` นี้นำรูปแบบการตอบ 4 ช้อยส์กลับมาใช้ในเบราว์เซอร์ ใช้คลังเพลงและธีมของเว็บเดิม พร้อมตัวเลือกชื่อเพลง/ศิลปินและสรุปคะแนน เว็บนี้ไม่ใช่ซอร์ส Android v1.0.0 ที่กู้คืนแบบตรงตัว ไฟล์ APK ใน Release เป็นไฟล์ต้นฉบับที่เก็บไว้โดยไม่แก้ไข
 
-Play [v1.2.0 on Vercel](https://thai-song-quiz-two.vercel.app/). See the [release](https://github.com/Xenz2207/thai-song-quiz/releases/tag/v1.2.0) and [documentation](docs/README.md).
+## ยืนยันไฟล์ APK ต้นฉบับ
 
-[Development screenshots](docs/Development-History.md) show earlier 100, 200, 800, and 1,000-song versions, with sources for original images and new captures of historical code.
+- ชื่อ: `GuessTheSongs-v1.0.0.apk`
+- Android package: `com.guessthesongs.app`
+- Manifest: `versionName='1.0.0'`, `versionCode='1'`
+- SHA256: `FEBC6DE01D0311A6E938A0C5FFE17C008E7DC250A09F3623146E65964D0BC7CD`
+- ตรวจพบเพลง 1,152 เพลงใน `assets/songs.json` ภายใน APK
 
-The four clue cards are **emoji puzzle**, **initial letters**, **artist/band**, and **missing letters**. Puzzles use the song title with catalog qualifiers removed. Open a clue to deduct 10 points; all four clues leave 60 before audio. Emoji puzzles are semantic interpretations, and initial letters follow Thai word segmentation with compound-word adjustments.
+## พัฒนาและตรวจสอบ
 
-To regenerate static clues after editing their rules or overrides, run `node scripts/generate-puzzle-hints.cjs`, then `npm test`.
+เว็บ static ไม่ต้องมี framework เปิด `index.html` ได้โดยตรง สคริปต์ `npm run build` คัดลอกเฉพาะ `index.html`, `styles.css`, `multiple-choice.js` ไป `dist` สำหรับเผยแพร่
 
-## Deploy
-
-This project is configured for Vercel's static hosting defaults. No build step or dependencies are required.
-
-## Validation
-
-The latest playback evidence and catalog counts are in `docs/catalog-validation.json`.
-
-For development checks, install Node.js 20+ and Microsoft Edge, then run:
-
-```sh
-npm ci
-npm test
-npm run test:audio
+```powershell
+npm.cmd ci
+npm.cmd test
+$env:VERIFY_AUDIO = '1'
+npm.cmd test
 ```
 
-After a complete successful audio run, `node scripts/write-catalog-report.cjs` updates the checked-in catalog report. Category changes create a fresh shuffle for the selected era.
+ต้องมี Microsoft Edge สำหรับทดสอบด้วย Playwright ตรวจตัวเลือกของเพลงทั้ง 1,152 เพลง คะแนน 0/100/200 การตอบซ้ำ หมวดหมู่ การยกเลิกเสียง และขนาดหน้าจอ 320–1280 px เมื่อเปิด `VERIFY_AUDIO=1` จะทดสอบเล่นเสียงจริงจาก iTunes ด้วย
 
-Playwright is a development dependency only. `npm test` checks category filtering, shuffle exhaustion, switching during audio loading, scoring, playback retries, history, and mobile overflow. `npm run test:audio` streams every preview in Edge and verifies that it reaches the playing event; it writes a fresh local report to `.catalog-work/expanded/final-playback.json`. It requires an internet connection. The report reflects availability at the recorded check time.
+```powershell
+$env:BASE_URL = 'https://thai-song-quiz-two.vercel.app/'
+$env:VERIFY_AUDIO = '1'
+npm.cmd test
+```
+
+บันทึกผลที่ `.catalog-work/multiple-choice-validation.json` การตรวจเสียงเป็นการสุ่มทดสอบเพลงจริงหนึ่งเพลง หากแหล่งเสียงไม่พร้อม เกมจะเปลี่ยนเพลงให้โดยไม่บันทึกรอบที่เสีย
+
+## Deploy และย้อนกลับ
+
+ใช้ Vercel โปรเจกต์ `thai-song-quiz` เก็บ deployment ID เดิมก่อนเปลี่ยน production และทดสอบ deployment ใหม่ก่อน promote ใช้ `vercel rollback <previous-deployment-id>` หากต้องย้อนกลับ Git branch แยกจาก `main` จนกว่าการทดสอบจะผ่าน และใช้ `git revert <release-commit>` เพื่อย้อนเฉพาะการเปลี่ยนแปลงนี้
+
+เสียงเป็นตัวอย่างสตรีมจาก iTunes ไม่ได้บรรจุหรือแคชไฟล์เพลง ลิงก์ Apple Music จะแสดงหลังเฉลยเพื่อไม่ให้ชื่อเพลงรั่วก่อนตอบ
