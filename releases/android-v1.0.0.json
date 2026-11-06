@@ -1,0 +1,16 @@
+{
+  "artifact": "GuessTheSongs-v1.0.0.apk",
+  "platform": "android",
+  "applicationId": "com.guessthesongs.app",
+  "versionName": "1.0.0",
+  "versionCode": 1,
+  "sha256": "FEBC6DE01D0311A6E938A0C5FFE17C008E7DC250A09F3623146E65964D0BC7CD",
+  "songCount": 1152,
+  "verification": {
+    "manifest": "Android SDK aapt dump badging",
+    "catalog": "assets/songs.json in original APK",
+    "choiceFields": ["titleChoices", "artistChoices", "getTitleChoices", "getArtistChoices"],
+    "choiceFieldsLocation": "classes2.dex in original APK"
+  },
+  "note": "Original previously built APK, archived without rebuilding or modifying it. This archive tag does not claim to contain the exact original Kotlin source."
+}
